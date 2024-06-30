@@ -130,8 +130,6 @@ class server(object):
 def main():
 
     try:
-        shit = 0
-        fuck = 0
         client = carla.Client('localhost',2000)
         client.set_timeout(2000.0)
         sim_world = client.get_world()
