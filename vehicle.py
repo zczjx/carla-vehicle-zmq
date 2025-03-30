@@ -13,7 +13,6 @@ class CarlaVehicle:
         self.sensor_manager = SensorManager(carla_world=self.carla_world, sensor_list=self.rig['sensors'])
         self.actor_list = []
         self.spawn_vehicle()
-        self.sensor_manager.spawn_sensors()
 
     def __del__(self):
         for actor in self.actor_list:
@@ -21,11 +20,12 @@ class CarlaVehicle:
     
     def spawn_vehicle(self):
         vehicle_info = self.rig['vehicle']
-        bp = self.carla_world.get_blueprint_library().filter(vehicle_info['name'])[0]
+        bp = self.carla_world.get_blueprint_library().filter(vehicle_info['bp_id'])[0]
         spawn_point = random.choice(self.carla_world.get_map().get_spawn_points())
         self.vehicle = self.carla_world.spawn_actor(bp, spawn_point)
         self.actor_list.append(self.vehicle)
         self.vehicle.set_autopilot(True)
+        self.sensor_manager.spawn_sensors()
 
     def run_loop(self, sync=False):
         while True:
