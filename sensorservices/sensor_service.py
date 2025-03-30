@@ -14,11 +14,14 @@ class SensorService(ABC):
         self._spawn_point = sensor_context['spawn_point']
         self._transform = carla.Transform(carla.Location(x=self._spawn_point['x'], y=self._spawn_point['y'], z=self._spawn_point['z']),
                                           carla.Rotation(roll=self._spawn_point['roll'], pitch=self._spawn_point['pitch'], yaw=self._spawn_point['yaw']))
-        self._sensor = self._carla_world.spawn_actor(self._sensor_bp, self._transform, attach_to=self._attach_to)
-    
     @abstractmethod
     def sensor_data_callback(self, data, sensor_name=''):
         pass
     
-    def __del__(self):
-        self._sensor.destroy()
+    @abstractmethod 
+    def set_sensor_bp_attribute(self):
+        pass
+    
+    def _spawn_sensor(self):
+        return self._carla_world.spawn_actor(self._sensor_bp, self._transform, attach_to=self._attach_to)
+    

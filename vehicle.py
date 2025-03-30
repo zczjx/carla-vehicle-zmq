@@ -25,7 +25,7 @@ class CarlaVehicle:
         self.vehicle = self.carla_world.spawn_actor(bp, spawn_point)
         self.actor_list.append(self.vehicle)
         self.vehicle.set_autopilot(True)
-        self.sensor_manager.spawn_sensors()
+        self.sensor_manager.spawn_sensors(attach_to=self.vehicle)
 
     def run_loop(self, sync=False):
         while True:
