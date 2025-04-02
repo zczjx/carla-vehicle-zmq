@@ -1,6 +1,7 @@
 import sys
 import time
 import carla
+import msgpack
 from sensorservices.sensor_service import SensorService
 
 class CameraService(SensorService):
@@ -20,6 +21,13 @@ class CameraService(SensorService):
         self._sensor_bp.set_attribute('image_size_y', str(self._sensor_context['image_size_y']))
     
     def sensor_data_callback(self, data, sensor_name=''):
+        meta_data = {'name': str(sensor_name), 'type': self._type}
+        meta_data['fov'] = int(data.fov)
+        meta_data['height'] = int(data.height)
+        meta_data['width'] = int(data.width)
+        packed_meta_data = msgpack.packb(meta_data)
+        self._zmq_socket.send(packed_meta_data, copy=False)
+        self._zmq_socket.send(data.raw_data, copy=False)
         # 增加帧计数
         self.frame_count += 1
         
@@ -37,5 +45,6 @@ class CameraService(SensorService):
             self.last_time = current_time
     
     def __del__(self):
+        super().__del__()
         if self.sensor is not None:
             self.sensor.destroy()

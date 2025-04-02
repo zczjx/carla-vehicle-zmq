@@ -34,3 +34,5 @@ class SensorManager:
     def run_sensors(self):
         for sensor_service in self.active_sensor_services:
             sensor_service.run()
+
+    
