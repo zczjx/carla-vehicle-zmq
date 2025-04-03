@@ -33,9 +33,9 @@ def main():
     parser.add_argument('--port', type=int, default=2000)
     parser.add_argument('--sync', action='store_true', help='Synchronous mode execution')
     parser.add_argument('--res', metavar='WIDTHxHEIGHT', default='1280x720', help='window resolution (default: 1280x720)')
-    
+
     args = parser.parse_args()
-    
+
     client = carla.Client(args.host, args.port)
     client.set_timeout(5.0)
     try:

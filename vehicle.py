@@ -17,7 +17,7 @@ class CarlaVehicle:
     def __del__(self):
         for actor in self.actor_list:
             actor.destroy()
-    
+
     def spawn_vehicle(self):
         vehicle_info = self.rig['vehicle']
         bp = self.carla_world.get_blueprint_library().filter(vehicle_info['bp_id'])[0]

@@ -12,27 +12,25 @@ class SensorManager:
         self.carla_world = carla_world
         self.sensor_list = sensor_list
         self.active_sensor_services = []
-    
+
     def spawn_sensors(self, attach_to=None):
         for sensor_context in self.sensor_list:
             if sensor_context['status'] == 'disabled':
                 continue
-            sensor_service = None
             if sensor_context['type'] == 'camera':
-                sensor_service = CameraService(self.carla_world, sensor_context, attach_to)
+                self.active_sensor_services.append(CameraService(self.carla_world, sensor_context, attach_to))
             elif sensor_context['type'] == 'gnss':
-                sensor_service = GnssService(self.carla_world, sensor_context, attach_to)
+                self.active_sensor_services.append(GnssService(self.carla_world, sensor_context, attach_to))
             elif sensor_context['type'] == 'imu':
-                sensor_service = ImuService(self.carla_world, sensor_context, attach_to)
+                self.active_sensor_services.append(ImuService(self.carla_world, sensor_context, attach_to))
             elif sensor_context['type'] == 'lidar':
-                sensor_service = LidarService(self.carla_world, sensor_context, attach_to)
+                self.active_sensor_services.append(LidarService(self.carla_world, sensor_context, attach_to))
             elif sensor_context['type'] == 'radar':
-                sensor_service = RadarService(self.carla_world, sensor_context, attach_to)
-            if sensor_service is not None:
-                self.active_sensor_services.append(sensor_service)
-    
+                self.active_sensor_services.append(RadarService(self.carla_world, sensor_context, attach_to))
+
+    def get_active_sensor_services(self):
+        return self.active_sensor_services
+
     def run_sensors(self):
         for sensor_service in self.active_sensor_services:
             sensor_service.run()
-
-    

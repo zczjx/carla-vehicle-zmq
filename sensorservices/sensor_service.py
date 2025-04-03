@@ -20,17 +20,18 @@ class SensorService(ABC):
         self._zmq_context = zmq.Context()
         self._zmq_socket = self._zmq_context.socket(zmq.PUB)
         self._zmq_socket.bind(self._zmq_ipc)
+
     @abstractmethod
     def sensor_data_callback(self, data, sensor_name=''):
         pass
-    
-    @abstractmethod 
+
+    @abstractmethod
     def set_sensor_bp_attribute(self):
         pass
-    
+
     def _spawn_sensor(self):
         return self._carla_world.spawn_actor(self._sensor_bp, self._transform, attach_to=self._attach_to)
-    
+
     def __del__(self):
         if self._zmq_socket is not None:
             self._zmq_socket.close()
