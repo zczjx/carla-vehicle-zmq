@@ -35,3 +35,4 @@ class SensorService(ABC):
     def __del__(self):
         if self._zmq_socket is not None:
             self._zmq_socket.close()
+            self._zmq_context.term()

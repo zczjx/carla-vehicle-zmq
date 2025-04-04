@@ -14,6 +14,8 @@ from viz_nodes.radar_viz_node import RadarVizNode
 
 try:
     import pygame
+    from pygame.locals import K_ESCAPE
+    from pygame.locals import K_q
 except ImportError:
     raise RuntimeError('cannot import pygame, make sure pygame package is installed')
 
@@ -28,18 +30,19 @@ class DisplayManager:
         self.viz_node_list = self.launch_sensor_viz_node(sensor_list)
 
     def launch_sensor_viz_node(self, sensor_list):
+        viz_node_list = []
         for sensor_context in sensor_list:
             if sensor_context['status'] == 'disabled':
                 continue
             if sensor_context['type'] == 'camera':
-                self.viz_node_list.append(CameraVizNode(sensor_context))
+                viz_node_list.append(CameraVizNode(sensor_context, self))
             elif sensor_context['type'] == 'lidar':
-                self.viz_node_list.append(LidarVizNode(sensor_context))
+                viz_node_list.append(LidarVizNode(sensor_context, self))
             elif sensor_context['type'] == 'location':
-                self.viz_node_list.append(LocationVizNode(sensor_context))
+                viz_node_list.append(LocationVizNode(sensor_context, self))
             elif sensor_context['type'] == 'radar':
-                self.viz_node_list.append(RadarVizNode(sensor_context))
-        return self.viz_node_list
+                viz_node_list.append(RadarVizNode(sensor_context, self))
+        return viz_node_list
 
     def get_window_size(self):
         return [int(self.window_size[0]), int(self.window_size[1])]
@@ -51,8 +54,6 @@ class DisplayManager:
         dis_size = self.get_display_size()
         return [int(gridPos[1] * dis_size[0]), int(gridPos[0] * dis_size[1])]
 
-    def add_sensor(self, sensor):
-        self.viz_node_list.append(sensor)
 
     def get_viz_node_list(self):
         return self.viz_node_list
@@ -61,17 +62,13 @@ class DisplayManager:
         if not self.render_enabled():
             return
 
-        for s in self.viz_node_list:
-            s.render()
+        for node in self.viz_node_list:
+            node.render()
 
         self.display.blit(
             font.render('% 5d FPS ' % clock.get_fps(), True, (255, 255, 255)),
             (8, 10))
         pygame.display.flip()
-
-    def destroy(self):
-        for s in self.viz_node_list:
-            s.destroy()
 
     def render_enabled(self):
         return self.display != None
