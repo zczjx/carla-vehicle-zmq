@@ -39,7 +39,7 @@ def run_visualization(args):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--rig', type=str, default='./rigs/carla-vehicle-default.json')
-    parser.add_argument('--res', metavar='WIDTHxHEIGHT', default='1280x720', help='window resolution (default: 1280x720)')
+    parser.add_argument('--res', metavar='WIDTHxHEIGHT', default='1920x1080', help='window resolution (default: 1920x1080)')
 
     args = parser.parse_args()
     args.width, args.height = [int(x) for x in args.res.split('x')]
