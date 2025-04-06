@@ -29,6 +29,7 @@ def run_visualization(args):
     font = get_font()
     clock = pygame.time.Clock()
     while True:
+        time.sleep(0.03)
         clock.tick(0)
         display_manager.render(font, clock)
         call_exit = display_manager.get_exit_event()

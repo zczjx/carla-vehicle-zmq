@@ -4,7 +4,7 @@
             "layout": "HIL"
         },
         "vehicle": {
-            "bp_id": "vehicle.dodge.charger_2020",
+            "bp_id": "vehicle.tesla.model3",
             "name": "ego_vehicle",
             "value": {
                 "actuation": {
