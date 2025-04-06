@@ -28,7 +28,7 @@ python3 visualization.py --rig=./rigs/carla-vehicle-default.json --res=1920x1080
 
 ### reference running snapshot
 
-![Running snapshot](docs/images/running_snapshot.PNG)
+![Running snapshot](docs/images/snapshot_running.PNG)
 
 
 
