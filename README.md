@@ -8,4 +8,30 @@ It enables the application running on the different platforms to get the vehicle
 
 ## Usage
 
+### launch the carla vehicle
+
+a. launch the carla engine
+```bash
+bash CarlaUE4.sh -RenderOffScreen
+```
+
+b. launch the carla vehicle
+```bash
+python3 main.py --rig=./rigs/carla-vehicle-default.json
+```
+
+### launch the visualization application(optional)
+
+```bash
+python3 visualization.py --rig=./rigs/carla-vehicle-default.json --res=1920x1080
+```
+
+### reference running snapshot
+
+![Running snapshot](docs/images/running_snapshot.PNG)
+
+
+
+
+
 
