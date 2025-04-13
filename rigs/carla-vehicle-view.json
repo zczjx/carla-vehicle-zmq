@@ -24,8 +24,8 @@
                 "image_size_y": 720,
                 "fov": 90.0,
                 "encode_format": "raw",
-                "parameter": "ip=192.168.3.30,port=2001",
-                "zmq_ipc": "ipc:///tmp/view_camera.raw",
+                "zmq_ipc": "ipc:///build/tmp/view_camera.raw",
+                "zmq_transport": "tcp://192.168.2.110:12001",
                 "protocol": "h264.rtp",
                 "display_position": [0, 0]
             }

@@ -16,8 +16,10 @@ from sensor_transports.radar_transporter import RadarTransporter
 class TransportManager:
     def __init__(self, sensor_list):
         self.transporter_list = self.launch_sensor_transporter(sensor_list)
+
     def run_loop(self):
-        pass
+        while True:
+            time.sleep(1)
 
     def launch_sensor_transporter(self, sensor_list):
         transporter_list = []
@@ -36,3 +38,6 @@ class TransportManager:
                 transporter_list.append(RadarTransporter(sensor))
         return transporter_list
 
+    def __del__(self):
+        for transporter in self.transporter_list:
+            transporter.__del__()
