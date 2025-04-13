@@ -1,0 +1,3 @@
+[submodule "sensor_transports/posix-bsp"]
+	path = sensor_transports/posix-bsp
+	url = https://github.com/zczjx/posix-bsp-perf.git
