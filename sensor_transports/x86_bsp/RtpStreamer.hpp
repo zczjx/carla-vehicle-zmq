@@ -27,16 +27,16 @@ private:
 
     int fillRtpHeader(VideoEncoder::EncOutputPkt& pkt, std::vector<uint8_t>& rtp_header);
 
+    uint32_t generateSSRC(const std::string& topic);
+
 
 private:
-    // RTP打包相关参数
     static constexpr int RTP_HEADER_SIZE = 12;
-    static constexpr int MAX_RTP_PAYLOAD = 1400;
     std::vector<uint8_t> m_rtp_header{};
-    uint16_t rtp_seq_ = 0;
-    uint32_t rtp_timestamp_ = 0;
-    uint32_t rtp_ssrc_ = 0x12345678;
-    int fps_ = 30;
+    uint16_t m_rtp_seq{0};
+    uint32_t m_rtp_ssrc{0};
+    int m_fps{30};
+    int64_t m_last_timestamp{0};
     std::shared_ptr<ZmqPublisher> m_zmq_publisher;
 };
 

@@ -28,16 +28,30 @@ public:
      * @brief Destroy the Zmq Subscriber object
      */
     virtual ~ZmqSubscriber();
+    /**
+     * @brief Receive data from the topic with more flag
+     *
+     * @param buffer buffer to store the received data
+     * @return total number of bytes received
+     */
+    size_t receiveDataMore(uint8_t* buffer, size_t bytes);
+
+    /**
+     * @brief Receive data from the topic with last flag
+     * 
+     * @param buffer buffer to store the received data
+     * @param bytes bytes of the user buffer size
+     * @return size_t the number of bytes received
+     */
+    size_t receiveData(uint8_t* buffer, size_t bytes);
 
     /**
      * @brief Receive data from the topic
-     *
-     * @param buffer buffer to store the received data
-     * @param bytes bytes of the user buffer size
-     * @return total number of bytes received
+     * 
+     * @param buffer 
+     * @param bytes 
+     * @return size_t 
      */
-    int receiveData(uint8_t* buffer, size_t bytes);
-
 private:
     std::shared_ptr<zmq::context_t> m_context;
     std::shared_ptr<zmq::socket_t> m_socket;
