@@ -1,3 +1,6 @@
+#ifndef __VIDEO_ENCODER_HPP__
+#define __VIDEO_ENCODER_HPP__
+
 extern "C"
 {
 #include <libavcodec/avcodec.h>
@@ -105,3 +108,5 @@ private:
 
 } // namespace x86_bsp
 } // namespace sensor_transports
+
+#endif // __VIDEO_ENCODER_HPP__
