@@ -22,9 +22,13 @@ TransportManager::~TransportManager()
 
 void TransportManager::runLoop()
 {
-    for (const auto& transporter : m_transporter_list)
+    size_t cycle_count = 0;
+
+    while (true)
     {
-        transporter->runLoop();
+        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+        cycle_count++;
+        std::cout << "TransportManager cycle_count: " << cycle_count << std::endl;
     }
 }
 
@@ -36,6 +40,7 @@ void TransportManager::launchSensorTransporter(const json& sensors_array)
 
         if (sensor_type.compare("camera") == 0)
         {
+            std::cout << "launchCameraTransporter camera" << std::endl;
             m_transporter_list.push_back(std::make_unique<CameraTransporter>(sensor));
         }
         else if (sensor_type.compare("gnss") == 0)

@@ -37,6 +37,8 @@ CameraTransporter::~CameraTransporter()
 
 void CameraTransporter::runLoop()
 {
+    uint64_t frame_count = 0;
+    std::cout << "runLoop" << std::endl;
     while (!m_stopSignal)
     {
         if (recvIpcData(m_video_encoder->getInputFrameDataBuffer(m_input_frame_buffer), m_input_frame_buffer.bytes) < 128)
@@ -46,6 +48,18 @@ void CameraTransporter::runLoop()
         else
         {
             m_video_encoder->encode(m_input_frame_buffer, m_output_pkt_buffer);
+            frame_count++;
+            static auto last_time = std::chrono::high_resolution_clock::now();
+            auto current_time = std::chrono::high_resolution_clock::now();
+            auto elapsed_time = std::chrono::duration_cast<std::chrono::seconds>(current_time - last_time).count();
+
+            if (elapsed_time >= 1)
+            {
+                float fps = static_cast<float>(frame_count) / elapsed_time;
+                std::cout << "CameraTransporter FPS: " << fps << std::endl;
+                frame_count = 0;
+                last_time = current_time;
+            }
             m_rtp_streamer->publishRtpPacket(m_output_pkt_buffer);
         }
     }

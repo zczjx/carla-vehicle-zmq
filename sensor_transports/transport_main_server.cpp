@@ -35,11 +35,11 @@ int run_transport_main_server(const std::string& json_file)
 int main(int argc, char *argv[])
 {
     ArgParser parser("TransportMainServer");
-    parser.addOption("--file", "json_file.json", "path to the json file");
+    parser.addOption("--rig", "json_file.json", "path to the json file");
     parser.parseArgs(argc, argv);
 
     std::string json_file;
-    parser.getOptionVal("--file", json_file);
+    parser.getOptionVal("--rig", json_file);
 
     try
     {
