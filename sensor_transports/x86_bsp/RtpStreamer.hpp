@@ -19,6 +19,8 @@ public:
 
     RtpStreamer(const std::string& topic, int fps);
 
+    RtpStreamer(std::shared_ptr<ZmqPublisher> zmq_publisher, int fps);
+
     virtual ~RtpStreamer();
 
     int publishRtpPacket(VideoEncoder::EncOutputPkt& pkt);

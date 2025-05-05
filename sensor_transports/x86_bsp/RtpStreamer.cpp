@@ -13,6 +13,12 @@ RtpStreamer::RtpStreamer(const std::string& topic, int fps)
 {
 }
 
+RtpStreamer::RtpStreamer(std::shared_ptr<ZmqPublisher> zmq_publisher, int fps)
+    : m_zmq_publisher(zmq_publisher), m_fps(fps), m_rtp_header(RTP_HEADER_SIZE),
+      m_rtp_ssrc(generateSSRC(zmq_publisher->getTopic()))
+{
+}
+
 RtpStreamer::~RtpStreamer()
 {
 }

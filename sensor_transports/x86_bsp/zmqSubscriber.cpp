@@ -7,6 +7,7 @@ namespace x86_bsp
 {
 
 ZmqSubscriber::ZmqSubscriber(const std::string& topic)
+    : m_topic(topic)
 {
     m_context = std::make_shared<zmq::context_t>(1);
     m_socket = std::make_shared<zmq::socket_t>(*m_context, ZMQ_SUB);

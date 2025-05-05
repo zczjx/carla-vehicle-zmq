@@ -52,9 +52,14 @@ public:
      * @param bytes 
      * @return size_t 
      */
+    const std::string& getTopic() const
+    {
+        return m_topic;
+    }
 private:
     std::shared_ptr<zmq::context_t> m_context;
     std::shared_ptr<zmq::socket_t> m_socket;
+    std::string m_topic;
 
 };
 } // namespace x86_bsp

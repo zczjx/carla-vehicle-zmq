@@ -14,7 +14,6 @@ namespace sensor_transports
 {
 namespace x86_bsp
 {
-
 class VideoEncoder
 {
 public:
@@ -64,7 +63,7 @@ public:
      * @param config encoder config
      */
 
-    VideoEncoder(const std::string &codec_name, EncoderConfig& config);
+    explicit VideoEncoder(const std::string &codec_name, EncoderConfig& config);
 
     int allocateInputFrame(EncInputFrame& frame);
 
