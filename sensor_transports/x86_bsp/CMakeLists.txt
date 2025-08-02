@@ -22,11 +22,17 @@ add_library(${PROJECT_NAME} SHARED ${SOURCES})
 
 set_target_properties(${PROJECT_NAME} PROPERTIES INSTALL_RPATH "$ORIGIN/../lib")
 
+target_link_directories(${PROJECT_NAME} PRIVATE ${PC_FFMPEG_LIBRARY_DIRS})
 target_link_libraries(${PROJECT_NAME} PRIVATE ${PC_ZMQ_LIBRARIES} ${PC_FFMPEG_LIBRARIES})
 
 target_include_directories(${PROJECT_NAME} PRIVATE
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/..>
     $<INSTALL_INTERFACE:include>
+)
+
+target_include_directories(${PROJECT_NAME} PUBLIC
+  ${PC_ZMQ_INCLUDE_DIRS}
+  ${PC_FFMPEG_INCLUDE_DIRS}
 )
 
 # 指定pkgconfig文件的内容
