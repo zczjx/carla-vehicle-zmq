@@ -37,8 +37,7 @@ class CameraVizNode(VizNode):
 
     def render(self):
         if self.surface is not None:
-            offset = self._display_manager.get_display_offset(self._display_pos)
-            self._display_manager.display.blit(self.surface, offset)
+            self._display_manager.blit_fitted_to_cell(self.surface, self._display_pos)
 
     def update_metadata(self, packed_meta):
         meta_data = msgpack.unpackb(packed_meta)

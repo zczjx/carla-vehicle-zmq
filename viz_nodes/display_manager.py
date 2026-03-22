@@ -54,6 +54,17 @@ class DisplayManager:
         dis_size = self.get_display_size()
         return [int(gridPos[1] * dis_size[0]), int(gridPos[0] * dis_size[1])]
 
+    def blit_fitted_to_cell(self, surface, grid_pos):
+        """Scale surface to the grid cell size, then blit (handles camera != window cell resolution)."""
+        if surface is None:
+            return
+        cell_w, cell_h = self.get_display_size()
+        offset = self.get_display_offset(grid_pos)
+        if surface.get_width() == cell_w and surface.get_height() == cell_h:
+            self.display.blit(surface, offset)
+        else:
+            scaled = pygame.transform.smoothscale(surface, (cell_w, cell_h))
+            self.display.blit(scaled, offset)
 
     def get_viz_node_list(self):
         return self.viz_node_list
@@ -62,6 +73,7 @@ class DisplayManager:
         if not self.render_enabled():
             return
 
+        self.display.fill((0, 0, 0))
         for node in self.viz_node_list:
             node.render()
 
