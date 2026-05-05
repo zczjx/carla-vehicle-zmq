@@ -1,7 +1,8 @@
 {
     "rig": {
         "properties": {
-            "layout": "HIL"
+            "layout": "HIL",
+            "grid_size": [1, 1]
         },
         "vehicle": {
             "bp_id": "vehicle.tesla.model3",
