@@ -24,8 +24,9 @@
                 "image_size_x": 1280,
                 "image_size_y": 720,
                 "fov": 90.0,
+                "raw_pixel_format": "BGRA",
                 "encode_format": "raw",
-                "parameter": "ip=192.168.3.30,port=2001",
+                "zmq_transport": "tcp://192.168.2.110:12001",
                 "zmq_ipc": "ipc:///tmp/slam_front_left.raw",
                 "protocol": "h264.rtp",
                 "display_position": [0, 0]
@@ -39,8 +40,9 @@
                 "image_size_x": 1280,
                 "image_size_y": 720,
                 "fov": 90.0,
+                "raw_pixel_format": "BGRA",
                 "encode_format": "raw",
-                "parameter": "ip=192.168.3.30,port=2001",
+                "zmq_transport": "tcp://192.168.2.110:12002",
                 "zmq_ipc": "ipc:///tmp/slam_front_center.raw",
                 "protocol": "h264.rtp",
                 "display_position": [0, 1]
@@ -54,8 +56,9 @@
                 "image_size_x": 1280,
                 "image_size_y": 720,
                 "fov": 90.0,
+                "raw_pixel_format": "BGRA",
                 "encode_format": "raw",
-                "parameter": "ip=192.168.3.30,port=2001",
+                "zmq_transport": "tcp://192.168.2.110:12003",
                 "zmq_ipc": "ipc:///tmp/slam_front_right.raw",
                 "protocol": "h264.rtp",
                 "display_position": [0, 2]
@@ -69,8 +72,9 @@
                 "image_size_x": 1280,
                 "image_size_y": 720,
                 "fov": 90.0,
+                "raw_pixel_format": "BGRA",
                 "encode_format": "raw",
-                "parameter": "ip=192.168.3.30,port=2001",
+                "zmq_transport": "tcp://192.168.2.110:12004",
                 "zmq_ipc": "ipc:///tmp/slam_rear_center.raw",
                 "protocol": "h264.rtp",
                 "display_position": [1, 1]
